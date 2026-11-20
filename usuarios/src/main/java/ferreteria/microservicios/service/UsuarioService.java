@@ -3,6 +3,7 @@ package ferreteria.microservicios.service;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,6 +35,7 @@ public class UsuarioService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "El run ya está registrado");
         }
         usuario.setId(null);
+        usuario.setClave(passwordEncoder.encode(usuario.getClave()));
         return usuarioRepository.save(usuario);
     }
 
@@ -48,7 +50,7 @@ public class UsuarioService {
         existente.setNombre(datos.getNombre());
         existente.setApellidos(datos.getApellidos());
         existente.setMail(datos.getMail());
-        existente.setClave(datos.getClave());
+        existente.setClave(passwordEncoder.encode(datos.getClave()));
         existente.setTipoUsuario(datos.getTipoUsuario());
         existente.setRegion(datos.getRegion());
         existente.setComuna(datos.getComuna());
@@ -68,10 +70,12 @@ public class UsuarioService {
             .orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.UNAUTHORIZED, "Una de las credenciales es incorrecta..."));
 
-        if (!usuario.getClave().equals(clave) || !usuario.isActivo()) {
+        if (!passwordEncoder.matches(clave, usuario.getClave()) || !usuario.isActivo()) {
             throw new ResponseStatusException(
                 HttpStatus.UNAUTHORIZED, "Una de las credenciales es incorrecta...");
         }
         return usuario;
     }
+
+    private final PasswordEncoder passwordEncoder;
 }
