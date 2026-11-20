@@ -38,7 +38,7 @@ public class Usuario {
     private String clave;
 
     @NotBlank
-    private String tipoUsuario;
+    private String tipoUsuario = "Cliente";
 
     private String region;
     private String comuna;
