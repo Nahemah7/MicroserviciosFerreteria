@@ -1,5 +1,7 @@
 package ferreteria.microservicios.controller;
 
+import ferreteria.microservicios.dto.LoginRequest;
+import ferreteria.microservicios.dto.UsuarioResponse;
 import ferreteria.microservicios.model.Usuario;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -27,30 +29,38 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @GetMapping
-    public List<Usuario> listar() {
-        return usuarioService.listar();
+    public List<UsuarioResponse> listar() {
+        return usuarioService.listar().stream().map(UsuarioResponse::desde).toList();
     }
 
     @GetMapping("/{id}")
-    public Usuario obtener(@PathVariable Long id) {
-        return usuarioService.obtener(id);
+    public UsuarioResponse obtener(@PathVariable Long id) {
+        return UsuarioResponse.desde(usuarioService.obtener(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario crear(@Valid @RequestBody Usuario usuario) {
-        return usuarioService.crear(usuario);
+    public UsuarioResponse crear(@Valid @RequestBody Usuario usuario) {
+        return UsuarioResponse.desde(usuarioService.crear(usuario));
     }
 
     @PutMapping("/{id}")
-    public Usuario actualizar(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
-        return usuarioService.actualizar(id, usuario);
+    public UsuarioResponse actualizar(@PathVariable Long id, @Valid @RequestBody Usuario usuario) {
+        return UsuarioResponse.desde(usuarioService.actualizar(id, usuario));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminar(@PathVariable Long id) {
         usuarioService.eliminar(id);
+    }
+
+
+
+
+    @PostMapping("/login")
+    public UsuarioResponse login(@Valid @RequestBody LoginRequest request) {
+        return UsuarioResponse.desde(usuarioService.login(request.mail(), request.clave()));
     }
     
 }

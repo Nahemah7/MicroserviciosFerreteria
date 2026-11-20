@@ -62,4 +62,16 @@ public class UsuarioService {
         obtener(id);
         usuarioRepository.deleteById(id);
     }
+
+    public Usuario login(String mail, String clave) {
+        Usuario usuario = usuarioRepository.findByMail(mail)
+            .orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.UNAUTHORIZED, "Una de las credenciales es incorrecta..."));
+
+        if (!usuario.getClave().equals(clave) || !usuario.isActivo()) {
+            throw new ResponseStatusException(
+                HttpStatus.UNAUTHORIZED, "Una de las credenciales es incorrecta...");
+        }
+        return usuario;
+    }
 }
