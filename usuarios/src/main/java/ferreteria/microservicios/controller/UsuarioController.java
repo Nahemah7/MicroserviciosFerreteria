@@ -1,6 +1,7 @@
 package ferreteria.microservicios.controller;
 
 import ferreteria.microservicios.dto.LoginRequest;
+import ferreteria.microservicios.dto.LoginResponse;
 import ferreteria.microservicios.dto.UsuarioResponse;
 import ferreteria.microservicios.model.Usuario;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import ferreteria.microservicios.service.UsuarioService;
+import ferreteria.microservicios.util.JwtUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequiredArgsConstructor
 public class UsuarioController {
     private final UsuarioService usuarioService;
+    private final JwtUtil jwtUtil;
 
     @GetMapping
     public List<UsuarioResponse> listar() {
@@ -59,8 +62,10 @@ public class UsuarioController {
 
 
     @PostMapping("/login")
-    public UsuarioResponse login(@Valid @RequestBody LoginRequest request) {
-        return UsuarioResponse.desde(usuarioService.login(request.mail(), request.clave()));
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+        Usuario usuario = usuarioService.login(request.mail(), request.clave());
+        String token = jwtUtil.generarToken(usuario.getMail(), usuario.getTipoUsuario());
+        return new LoginResponse(token, UsuarioResponse.desde(usuario));
     }
     
 }
