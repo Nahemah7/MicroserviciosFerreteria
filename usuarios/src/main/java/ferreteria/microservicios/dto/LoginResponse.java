@@ -1,6 +1,6 @@
 package ferreteria.microservicios.dto;
 
 
-public record LoginResponse(String token, UsuarioResponse Usuario) {
+public record LoginResponse(String token, UsuarioResponse usuario) {
     
 }
