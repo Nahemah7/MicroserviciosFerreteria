@@ -1,0 +1,98 @@
+[
+  {
+    "codigo": "MC001",
+    "categoria": "Mat. Construcción",
+    "subcategoria": "Cementos",
+    "nombre": "Cemento Polpaico gris 25 kg",
+    "marca": "Polpaico",
+    "unidad": "Saco",
+    "pCompra": 3200,
+    "pVenta": 5990,
+    "stock": 80,
+    "stockMin": 20
+  },
+  {
+    "codigo": "MC002",
+    "categoria": "Mat. Construcción",
+    "subcategoria": "Cementos",
+    "nombre": "Cemento Melón blanco 25 kg",
+    "marca": "Melón",
+    "unidad": "Saco",
+    "pCompra": 4100,
+    "pVenta": 7490,
+    "stock": 40,
+    "stockMin": 10
+  },
+  {
+    "codigo": "HM001",
+    "categoria": "Herramientas",
+    "subcategoria": "Manuales",
+    "nombre": "Martillo carpintero 500g",
+    "marca": "Stanley",
+    "unidad": "Unidad",
+    "pCompra": 4200,
+    "pVenta": 7990,
+    "stock": 20,
+    "stockMin": 5
+  },
+  {
+    "codigo": "HM002",
+    "categoria": "Herramientas",
+    "subcategoria": "Manuales",
+    "nombre": "Alicate universal 8 pulgadas",
+    "marca": "Stanley",
+    "unidad": "Unidad",
+    "pCompra": 3800,
+    "pVenta": 7290,
+    "stock": 15,
+    "stockMin": 5
+  },
+  {
+    "codigo": "PT001",
+    "categoria": "Pinturas",
+    "subcategoria": "Látex",
+    "nombre": "Pintura látex interior 1 galón blanco",
+    "marca": "Sipa",
+    "unidad": "Galón",
+    "pCompra": 5200,
+    "pVenta": 9990,
+    "stock": 40,
+    "stockMin": 10
+  },
+  {
+    "codigo": "GS001",
+    "categoria": "Gasfitería",
+    "subcategoria": "Tuberías",
+    "nombre": "Cañería PVC 1/2 pulgada x 6m",
+    "marca": "Tigre",
+    "unidad": "Unidad",
+    "pCompra": 2800,
+    "pVenta": 5490,
+    "stock": 30,
+    "stockMin": 10
+  },
+  {
+    "codigo": "EL001",
+    "categoria": "Electricidad",
+    "subcategoria": "Conductores",
+    "nombre": "Cable unipolar 1.5mm2 por metro",
+    "marca": "Condulac",
+    "unidad": "Metro",
+    "pCompra": 290,
+    "pVenta": 590,
+    "stock": 100,
+    "stockMin": 30
+  },
+  {
+    "codigo": "JA001",
+    "categoria": "Jardín",
+    "subcategoria": "Mangueras",
+    "nombre": "Manguera riego 3/4 pulgada x 25m",
+    "marca": "Tigre",
+    "unidad": "Unidad",
+    "pCompra": 12000,
+    "pVenta": 22990,
+    "stock": 6,
+    "stockMin": 2
+  }
+]
