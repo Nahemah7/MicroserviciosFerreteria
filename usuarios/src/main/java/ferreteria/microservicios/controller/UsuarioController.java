@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import ferreteria.microservicios.service.UsuarioService;
 import ferreteria.microservicios.util.JwtUtil;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -40,6 +41,7 @@ public class UsuarioController {
     //ESTO EXIGE ADMIN
 
     @GetMapping
+    @SecurityRequirement(name = "bearerAuth")
     public List<UsuarioResponse> listar(
             @RequestHeader(value = "Authorization", required = false) String authHeader) {
         exigirAdmin(authHeader);
@@ -48,6 +50,7 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @SecurityRequirement(name = "bearerAuth")
     public UsuarioResponse crear(@Valid @RequestBody UsuarioAdminRequest r,
             @RequestHeader(value = "Authorization", required = false) String authHeader) {
         exigirAdmin(authHeader);
@@ -68,6 +71,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public UsuarioResponse actualizar(@PathVariable Long id,
             @Valid @RequestBody UsuarioUpdateRequest r,
             @RequestHeader(value = "Authorization", required = false) String authHeader) {
@@ -77,6 +81,7 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @SecurityRequirement(name = "bearerAuth")
     public void eliminar(@PathVariable Long id,
             @RequestHeader(value = "Authorization", required = false) String authHeader) {
         exigirAdmin(authHeader);
@@ -84,6 +89,7 @@ public class UsuarioController {
     }
 
     @PatchMapping("/{id}/activo")
+    @SecurityRequirement(name = "bearerAuth")
     public UsuarioResponse alternarActivo(@PathVariable Long id,
         @RequestHeader(value = "Authorization", required = false) String authHeader) {
             exigirAdmin(authHeader);
@@ -93,6 +99,7 @@ public class UsuarioController {
     //ESTO EXIGE TOKEN
 
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public UsuarioResponse obtener(@PathVariable Long id,
             @RequestHeader(value = "Authorization", required = false) String authHeader) {
         exigirToken(authHeader);
