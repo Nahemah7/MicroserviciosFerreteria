@@ -96,13 +96,11 @@ public class UsuarioController {
         return UsuarioResponse.desde(usuarioService.alternarActivo(id));
     }
 
-    //ESTO EXIGE TOKEN
-
     @GetMapping("/{id}")
     @SecurityRequirement(name = "bearerAuth")
     public UsuarioResponse obtener(@PathVariable Long id,
             @RequestHeader(value = "Authorization", required = false) String authHeader) {
-        exigirToken(authHeader);
+        exigirAdmin(authHeader);
         return UsuarioResponse.desde(usuarioService.obtener(id));
     }
 
