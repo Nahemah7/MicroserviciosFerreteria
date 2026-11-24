@@ -3,6 +3,7 @@ package ferreteria.notificaciones.notificacion;
 import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
+import java.util.List;
 
 @Service
 public class NotificacionService {
@@ -24,10 +25,18 @@ public class NotificacionService {
         return respuesta(notificacion);
     }
 
+    public List<NotificacionResponse> listar() {
+        return notificacionRepository.findAllByOrderByCreadoEnDesc().stream()
+                .map(this::respuesta)
+                .toList();
+    }
+
     private NotificacionResponse respuesta(Notificacion notificacion) {
         return new NotificacionResponse(
                 notificacion.getId(),
                 notificacion.getPedidoId(),
+                notificacion.getDestinatario(),
+                notificacion.getMensaje(),
                 notificacion.getEstado(),
                 notificacion.getCreadoEn());
     }
