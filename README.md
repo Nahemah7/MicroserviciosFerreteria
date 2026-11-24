@@ -1,6 +1,6 @@
 # Backend Ferretería Los Maestros
 
-Backend en Java/Spring Boot con los servicios `usuarios`, `tienda-service` (productos, stock, carrito y comentarios), `pedidos-service` y `notificaciones-service`, además de Eureka y Gateway. Este paquete no incluye archivos del frontend.
+Backend en Java/Spring Boot con los servicios `usuarios`, `tienda-service` (productos, stock, carrito y contactos), `pedidos-service` y `notificaciones-service`, además de Eureka y Gateway. Este paquete no incluye archivos del frontend.
 
 ## Requisitos
 
@@ -56,8 +56,8 @@ El Gateway publica las APIs en `http://localhost:8080`.
 - Confirmación: `POST /api/carrito/{id}/confirmar` valida stock y descuenta existencias dentro de una transacción. No procesa pagos ni registra una orden.
 - Pedidos: `POST /api/pedidos` con `{"carritoId":"<id>","nombreCliente":"Ana","correoCliente":"ana@example.com"}` crea el pedido, confirma el carrito a través de tienda y registra una notificación; `GET /api/pedidos/{id}` consulta el pedido y `POST /api/pedidos/{id}/notificar` reintenta registrar su notificación.
 - Notificaciones: `GET /api/notificaciones/pedido/{pedidoId}` consulta el aviso registrado. Los avisos se crean desde pedidos y son idempotentes por número de pedido.
-- Comentarios públicos: `GET /api/productos/{codigo}/comentarios`, `POST /api/productos/{codigo}/comentarios` con `{"nombre":"Ana","texto":"Buen producto"}`.
-- Moderación (Administrador): `GET /api/comentarios`, `PATCH /api/comentarios/{id}/visibilidad` con `{"visible":false}`, `DELETE /api/comentarios/{id}`.
+- Contacto: `POST /api/contactos` con `{"nombre":"Ana","correo":"ana@example.com","comentario":"Necesito información sobre un producto"}`. El mensaje se guarda en la base de datos.
+- Gestión de contactos (Administrador): `GET /api/contactos`, `PATCH /api/contactos/{id}/visibilidad` con `{"visible":false}`, `DELETE /api/contactos/{id}`.
 
 Las rutas administrativas requieren `Authorization: Bearer <JWT>` emitido por usuarios y con rol `Administrador`. Login y registro de usuarios no requieren token.
 

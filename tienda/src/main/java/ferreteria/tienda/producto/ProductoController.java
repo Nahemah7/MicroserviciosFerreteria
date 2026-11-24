@@ -2,9 +2,6 @@ package ferreteria.tienda.producto;
 
 import java.util.List;
 
-import ferreteria.tienda.comentario.ComentarioRequest;
-import ferreteria.tienda.comentario.ComentarioResponse;
-import ferreteria.tienda.comentario.ComentarioService;
 import ferreteria.tienda.security.AdminTokenVerifier;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -26,13 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/productos")
 public class ProductoController {
     private final ProductoService productoService;
-    private final ComentarioService comentarioService;
     private final AdminTokenVerifier adminTokenVerifier;
 
-    public ProductoController(ProductoService productoService, ComentarioService comentarioService,
-                              AdminTokenVerifier adminTokenVerifier) {
+    public ProductoController(ProductoService productoService, AdminTokenVerifier adminTokenVerifier) {
         this.productoService = productoService;
-        this.comentarioService = comentarioService;
         this.adminTokenVerifier = adminTokenVerifier;
     }
 
@@ -89,15 +83,4 @@ public class ProductoController {
         productoService.eliminar(codigo);
     }
 
-    @GetMapping("/{codigo}/comentarios")
-    public List<ComentarioResponse> listarComentarios(@PathVariable String codigo) {
-        return comentarioService.listarVisibles(codigo);
-    }
-
-    @PostMapping("/{codigo}/comentarios")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ComentarioResponse crearComentario(@PathVariable String codigo,
-                                              @Valid @RequestBody ComentarioRequest request) {
-        return comentarioService.crear(codigo, request);
-    }
 }

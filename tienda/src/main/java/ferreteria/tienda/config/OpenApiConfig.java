@@ -14,7 +14,7 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("Ferretería Los Maestros - Tienda API")
-                        .description("Catálogo, stock, carrito de invitado y comentarios")
+                        .description("Catálogo, stock, carrito de invitado y contactos")
                         .version("1.0.0"))
                 .components(new Components().addSecuritySchemes("bearerAuth",
                         new SecurityScheme().type(SecurityScheme.Type.HTTP)
