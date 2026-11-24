@@ -35,7 +35,7 @@ spring:
         - id: tienda-service
           uri: lb://tienda-service
           predicates:
-            - Path=/api/productos/**,/api/carrito/**,/api/comentarios/**
+            - Path=/api/productos/**,/api/carrito/**,/api/contactos/**
         - id: tienda-openapi
           uri: lb://tienda-service
           predicates:
